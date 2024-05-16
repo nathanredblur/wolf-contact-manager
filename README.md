@@ -13,8 +13,8 @@ My intention is to demonstrate my skills in frontend development, especially in 
 [X] Users should be able to view a list of their contacts.
 [X] Users should be able to add contacts to the list.
 [X] Validation: For each contact, a name is mandatory, but a contact cannot solely consist of a name; it must include either a phone number, an email, or both.
-[ ] Show a counter displaying the total number of contacts with a phone number.
-[ ] Show a counter displaying the total number of contacts with an email.
+[X] Show a counter displaying the total number of contacts with a phone number.
+[X] Show a counter displaying the total number of contacts with an email.
 [X] The solution should use a share state management library.
 
 ## Technologies Used

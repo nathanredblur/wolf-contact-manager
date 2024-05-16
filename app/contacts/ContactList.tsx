@@ -1,9 +1,14 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import CardListElement from "./CardListElement";
-import useStore from "@/utils/useStore";
+import useStore, { Contact } from "@/utils/useStore";
+import { EmailIcon, PhoneIcon } from "@/components/icons";
 
 export default function ContactList() {
   const contacts = useStore((state) => state.contacts);
+  const countEmails = (contacts: Contact[]) =>
+    contacts.filter((contact) => contact.email).length;
+  const countPhones = (contacts: Contact[]) =>
+    contacts.filter((contact) => contact.phone).length;
 
   return (
     <Card className="h-full py-3 flex-1">
@@ -15,9 +20,15 @@ export default function ContactList() {
           <CardListElement contactData={contact} key={contact.id.value} />
         ))}
       </CardBody>
-      <CardFooter className="flex justify-between items-center">
-        <small className="text-default-500">Play all</small>
-        <small className="text-default-500">Shuffle</small>
+      <CardFooter className="flex gap-4">
+        <div className="text-default-500 flex gap-2 items-center">
+          <EmailIcon size={18} />
+          {countEmails(contacts)} Emails
+        </div>
+        <div className="text-default-500 flex gap-2 items-center">
+          <PhoneIcon size={18} />
+          {countPhones(contacts)} Phones
+        </div>
       </CardFooter>
     </Card>
   );
