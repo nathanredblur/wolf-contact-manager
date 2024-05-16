@@ -1,8 +1,8 @@
-import { HeartFilledIcon } from "@/components/icons";
+import { EmailIcon, HeartFilledIcon, PhoneIcon } from "@/components/icons";
 import useStore, { Contact } from "@/utils/useStore";
-import { Image } from "@nextui-org/image";
+import { Avatar } from "@nextui-org/avatar";
+import { Chip } from "@nextui-org/chip";
 import clsx from "clsx";
-import NextImage from "next/image";
 
 type Props = {
   contactData: Contact;
@@ -25,26 +25,37 @@ export default function CardListElement({ contactData }: Props) {
       )}
       onClick={onClick}
     >
-      <Image
-        as={NextImage}
-        isZoomed={isActive}
-        width={48}
-        height={48}
-        radius="full"
-        src={contactData.picture?.thumbnail} // Add conditional check for undefined
-        alt="user"
-      />
+      <Avatar size="md" src={contactData.picture?.thumbnail} showFallback />
       <div className="flex-1">
-        <h4 className="font-bold text-large">{fullName} </h4>
-        <p className="text-default-500">
-          <small>
-            <span className="text-default-500">+234 123 456 789</span>
-          </small>
-        </p>
+        <h4 className="font-bold text-base">{fullName} </h4>
+        <div className="flex gap-1">
+          {contactData.phone && (
+            <Chip
+              startContent={<PhoneIcon size={18} />}
+              variant="bordered"
+              color="danger"
+              size="sm"
+            >
+              Phone
+            </Chip>
+          )}
+          {contactData.email && (
+            <Chip
+              startContent={<EmailIcon size={18} />}
+              variant="bordered"
+              color="warning"
+              size="sm"
+            >
+              Email
+            </Chip>
+          )}
+        </div>
       </div>
-      <div className="border-1 rounded-full size-12 flex items-center justify-center">
-        <HeartFilledIcon className="text-white" />
-      </div>
+      {contactData.phone && contactData.email && (
+        <div className="border-1 rounded-full size-10 flex items-center justify-center">
+          <HeartFilledIcon className="text-white" />
+        </div>
+      )}
     </div>
   );
 }
