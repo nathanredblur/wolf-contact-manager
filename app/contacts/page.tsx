@@ -22,7 +22,7 @@ export default function ContactsPage() {
       initContacts(staticData);
     };
     fetchSeedData();
-  }, []);
+  }, [initContacts]);
 
   return (
     <div className="flex gap-3 h-full">
