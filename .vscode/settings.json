@@ -1,4 +1,4 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "gitdoc.enabled": true
+  "gitdoc.enabled": false
 }
