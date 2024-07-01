@@ -1,16 +1,11 @@
 import { create } from "zustand";
 
 export type Contact = {
-  id: {
-    name?: string;
-    value?: string;
-  };
-  name: {
-    title?: string;
-    first: string;
-    last: string;
-  };
-  email?: string;
+  id: number;
+  name: string;
+  email: string;
+  gender: "male" | "female" | "other";
+  status: "inactive" | "active";
   phone?: string;
   cell?: string;
   picture?: {
@@ -50,8 +45,11 @@ const useStore = create<Store & Actions>((set) => ({
   newContact: () =>
     set((state) => ({
       selectedContact: {
-        id: { value: "new" },
-        name: { first: "", last: "" },
+        id: Math.random(),
+        name: "new",
+        email: "",
+        gender: "other",
+        status: "inactive",
         mode: "edit",
       },
     })),
@@ -70,7 +68,7 @@ const useStore = create<Store & Actions>((set) => ({
   deleteContact: () => {
     set((state) => ({
       contacts: state.contacts.filter(
-        (c) => c.id.value !== state.selectedContact?.id.value
+        (c) => c.id !== state.selectedContact?.id
       ),
       selectedContact: null,
     }));
@@ -81,9 +79,9 @@ const useStore = create<Store & Actions>((set) => ({
     const { mode, ...simpleContact } = contact;
 
     // if the contact is new
-    if (simpleContact.id.value === "new") {
+    if (simpleContact.name === "new") {
       // create a new ID
-      simpleContact.id.value = Math.random().toString(36).substr(2, 9);
+      simpleContact.id = Math.random();
 
       set((state) => ({
         contacts: [...state.contacts, simpleContact],
@@ -95,7 +93,7 @@ const useStore = create<Store & Actions>((set) => ({
     // update the contact
     set((state) => ({
       contacts: state.contacts.map((c) =>
-        c.id.value === simpleContact.id.value ? simpleContact : c
+        c.id === simpleContact.id ? simpleContact : c
       ),
       selectedContact: simpleContact,
     }));

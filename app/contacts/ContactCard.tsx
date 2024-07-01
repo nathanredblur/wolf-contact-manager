@@ -26,16 +26,6 @@ export default function ContactCard() {
 
     setContact((prev) => {
       if (!prev) return null;
-      if (field === "first" || field === "last") {
-        return {
-          ...prev,
-          name: {
-            ...prev.name,
-            [field]: value,
-          },
-        };
-      }
-
       return {
         ...prev,
         [field]: value,
@@ -46,8 +36,8 @@ export default function ContactCard() {
   const onSave = () => {
     if (!contact) return;
     // Validate that first and last name are not empty
-    if (!contact.name.first || !contact.name.last) {
-      alert("First and Last name are required");
+    if (!contact.name) {
+      alert("Name is required");
       return;
     }
 
@@ -62,7 +52,7 @@ export default function ContactCard() {
 
   const onCancel = () => {
     // if canceling a new contact, delete it
-    if (contact?.id.value === "new") {
+    if (contact?.name === "new") {
       deleteContact();
       setContact(null);
     } else {
@@ -78,7 +68,7 @@ export default function ContactCard() {
 
   if (!selectedContact) return null;
 
-  const fullName = `${selectedContact.name.first} ${selectedContact.name.last}`;
+  const fullName = selectedContact.name;
 
   return (
     <Card className="h-full py-3 flex-1">
@@ -87,22 +77,13 @@ export default function ContactCard() {
           <Avatar size="lg" src={selectedContact.picture?.large} showFallback />
           <div>
             {isEditing && (
-              <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                <Input
-                  type="text"
-                  name="first"
-                  label="First Name"
-                  onChange={onChange}
-                  value={contact?.name.first || ""}
-                />
-                <Input
-                  type="text"
-                  name="last"
-                  label="Last Name"
-                  onChange={onChange}
-                  value={contact?.name.last || ""}
-                />
-              </div>
+              <Input
+                type="text"
+                name="name"
+                label="Name"
+                onChange={onChange}
+                value={contact?.name || ""}
+              />
             )}
             {!isEditing && <h4 className="font-bold text-large">{fullName}</h4>}
           </div>

@@ -4,7 +4,7 @@
 
 This is a contact manager app that allows users to add, edit, delete, and search for contacts. The app is built using Next.js, NextUI, Tailwind CSS, and TypeScript.
 
-This test project is part of the recruitment process for the position of Frontend Developer at WOLF.
+This test project is part of the recruitment process for the position of Frontend Developer.
 
 My intention is to demonstrate my skills in frontend development, especially in the use of Next.js, NextUI, Tailwind CSS, and TypeScript. I hope you enjoy the project!
 

@@ -5,6 +5,7 @@ import { EmailIcon, PhoneIcon } from "@/components/icons";
 
 export default function ContactList() {
   const contacts = useStore((state) => state.contacts);
+  console.log(contacts);
   const countEmails = (contacts: Contact[]) =>
     contacts.filter((contact) => contact.email).length;
   const countPhones = (contacts: Contact[]) =>
@@ -17,7 +18,7 @@ export default function ContactList() {
       </CardHeader>
       <CardBody className="overflow-visible py-2 flex flex-col gap-1">
         {contacts.map((contact) => (
-          <CardListElement contactData={contact} key={contact.id.value} />
+          <CardListElement contactData={contact} key={contact.id} />
         ))}
       </CardBody>
       <CardFooter className="flex gap-4">

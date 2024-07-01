@@ -12,13 +12,9 @@ export default function ContactsPage() {
   useEffect(() => {
     const fetchSeedData = async () => {
       const staticData = await fetch(
-        "https://randomuser.me/api/?results=5&seed=wolf&exc=gender,location,login,registered,dob,nat",
-        {
-          cache: "force-cache",
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => data.results);
+        "https://gorest.co.in/public/v2/users",
+        {}
+      ).then((res) => res.json());
       initContacts(staticData);
     };
     fetchSeedData();

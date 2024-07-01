@@ -14,8 +14,8 @@ export default function CardListElement({ contactData }: Props) {
 
   const onClick = () => selectContact(contactData);
 
-  const fullName = `${contactData.name.first} ${contactData.name.last}`;
-  const isActive = selectedContact?.id.value === contactData.id.value;
+  const fullName = contactData.name;
+  const isActive = selectedContact?.id === contactData.id;
 
   return (
     <div
@@ -47,6 +47,36 @@ export default function CardListElement({ contactData }: Props) {
               size="sm"
             >
               Email
+            </Chip>
+          )}
+
+          <Chip
+            // startContent={<EmailIcon size={18} />}
+            variant="bordered"
+            color="warning"
+            size="sm"
+          >
+            {contactData.gender}
+          </Chip>
+
+          {contactData.status === "active" && (
+            <Chip
+              // startContent={<EmailIcon size={18} />}
+              variant="bordered"
+              color="success"
+              size="sm"
+            >
+              {contactData.status}
+            </Chip>
+          )}
+          {contactData.status === "inactive" && (
+            <Chip
+              // startContent={<EmailIcon size={18} />}
+              variant="bordered"
+              color="danger"
+              size="sm"
+            >
+              {contactData.status}
             </Chip>
           )}
         </div>
